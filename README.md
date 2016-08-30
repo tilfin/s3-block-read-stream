@@ -14,6 +14,46 @@ $ npm install s3-block-read-stream
 
 ## How to Use
 
+```
+const S3BlockReadStream = require('s3-block-read-stream');
+
+new S3BlockReadStream({
+  Bucket: 'test-bucket',
+  Key: 'something.txt'
+}, {
+  interval: 1000, // interval for each http request (default is 0 millsecond)
+  blockSize: 16 * 1024 * 1024 // download partial content block size at once (default is 16MB)
+})
+.pipe(process.stdout);
+```
+
+### Output progress information
+
+Pass `logCallback` parameter to the second argument for constructor
+
+```
+new S3BlockReadStream({
+  Bucket: 'test-bucket',
+  Key: 'foo/bar.txt'
+}, {
+  logCallback: function(msg) {
+    console.log(msg)
+  }
+})
+.pipe(process.stdout);
+```
+
+```
+$ node example.js > /dev/null
+test-bucket/foo/bar.txt - Start
+test-bucket/foo/bar.txt - File Size: 1654534
+test-bucket/foo/bar.txt - Download Range: bytes=0-1654533
+test-bucket/foo/bar.txt - Received Size: 1654534
+test-bucket/foo/bar.txt - Done
+```
+
+### Example
+
 Downloading CSV file, converting into JSON and printing stdout
 
 ```
