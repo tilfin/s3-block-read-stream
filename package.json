@@ -1,6 +1,6 @@
 {
   "name": "s3-block-read-stream",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "S3 block readable stream is strong for downloading large file",
   "keywords": [
     "s3",

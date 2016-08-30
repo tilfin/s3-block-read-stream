@@ -26,10 +26,12 @@ new S3BlockReadStream({
   Key: 'something.txt'
 }, {
   interval: 1000, // interval for each http request (default is 0 millsecond)
-  blockSize: 16 * 1024 * 1024 // download partial content block size at once (default is 16MB)
+  blockSize: 64 * 1024 * 1024 // download partial content block size at once (default is 64MB)
 })
 .pipe(process.stdout);
 ```
+
+* Attention to increasing API requests if `blockSize` is too small
 
 ### Output progress information
 
