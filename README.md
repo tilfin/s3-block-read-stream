@@ -1,12 +1,14 @@
 S3BlockReadStream
 =================
 
+[![NPM Version][npm-image]][npm-url]
 [![Build Status](https://travis-ci.org/tilfin/s3-block-read-stream.svg?branch=master)](https://travis-ci.org/tilfin/s3-block-read-stream)
 
 A S3 readable stream is downloading an object divided into blocks by partial download with the range header.
 
 * It is possible to prevent a broken connection of long-time against S3 normal stream.
 * You can adjust a download speed on flowing mode by editing the interval.
+* Node.js 4.3 or Later
 
 ## How to Install
 
@@ -73,3 +75,10 @@ readStream.pipe(csv.parse())
   }))
   .pipe(process.stdout);
 ```
+
+## License
+
+  [MIT](LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/s3-block-read-stream.svg
+[npm-url]: https://npmjs.org/package/s3-block-read-stream
