@@ -17,7 +17,7 @@
     "url": "https://github.com/tilfin/s3-block-read-stream"
   },
   "scripts": {
-    "test": "AWS_ACCESS_KEY_ID=x AWS_SECRET_ACCESS_KEY=x ./node_modules/mocha/bin/mocha test/test.js"
+    "test": "./node_modules/mocha/bin/mocha test/test.js"
   },
   "devDependencies": {
     "aws-sdk": "^2.5.3",

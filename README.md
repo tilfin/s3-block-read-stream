@@ -8,7 +8,7 @@ A S3 readable stream is downloading an object divided into blocks by partial dow
 
 * It is possible to prevent a broken connection of long-time against S3 normal stream.
 * You can adjust a download speed on flowing mode by editing the interval.
-* Node.js 4.3 or Later
+* Node.js 4.2 or Later
 
 ## How to Install
 
@@ -19,11 +19,13 @@ $ npm install s3-block-read-stream
 ## How to Use
 
 ```
+const AWS = require('aws-sdk');
 const S3BlockReadStream = require('s3-block-read-stream');
 
-new S3BlockReadStream({
+new S3BlockReadStream(new AWS.S3({ apiVersion: '2006-03-01' }), {
   Bucket: 'test-bucket',
-  Key: 'something.txt'
+  Key: 'something.txt',
+  // any other params of AWS.S3.getObject method
 }, {
   interval: 1000, // interval for each http request (default is 0 millsecond)
   blockSize: 64 * 1024 * 1024 // download partial content block size at once (default is 64MB)
@@ -38,12 +40,12 @@ new S3BlockReadStream({
 Pass `logCallback` parameter to the second argument for constructor
 
 ```
-new S3BlockReadStream({
+new S3BlockReadStream(new AWS.S3({ apiVersion: '2006-03-01' }), {
   Bucket: 'test-bucket',
   Key: 'foo/bar.txt'
 }, {
   logCallback: function(msg) {
-    console.log(msg)
+    console.warn(msg)
   }
 })
 .pipe(process.stdout);
@@ -63,10 +65,11 @@ test-bucket/foo/bar.txt - Done
 Downloading CSV file, converting into JSON and printing stdout
 
 ```
+const AWS = require('aws-sdk');
 const csv = require('csv');
 const S3BlockReadStream = require('s3-block-read-stream');
 
-const readStream = new S3BlockReadStream({
+const readStream = new S3BlockReadStream(new AWS.S3({ apiVersion: '2006-03-01' }), {
   Bucket: 'your-bucket',
   Key: 'something.csv'
 });

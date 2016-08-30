@@ -1,5 +1,6 @@
 'use strict';
 
+const AWS = require('aws-sdk');
 const nock = require('nock');
 const S3BlockReadStream = require('../lib/readstream');
 const MemoryWriteStream = require('./memory_write_stream');
@@ -8,6 +9,12 @@ const expect = chai.expect;
 
 
 describe('S3BlockReadStream', () => {
+  const s3 = new AWS.S3({
+      apiVersion: '2006-03-01',
+      accessKeyId: 'dummy',
+      secretAccessKey: 'dummy'
+    });
+
   const headRes = {
     'accept-ranges': 'bytes',
     'content-type': 'application/octet-stream',
@@ -38,7 +45,7 @@ describe('S3BlockReadStream', () => {
     });
 
     it('read whole data', (done) => {
-      const readStream = new S3BlockReadStream({
+      const readStream = new S3BlockReadStream(s3, {
         Bucket: 'test-bucket',
         Key: 'foo/bar.txt'
       });
@@ -82,7 +89,7 @@ describe('S3BlockReadStream', () => {
     });
 
     it('read whole data', (done) => {
-      const readStream = new S3BlockReadStream({
+      const readStream = new S3BlockReadStream(s3, {
         Bucket: 'test-bucket',
         Key: 'foo/bar.txt'
       }, {
