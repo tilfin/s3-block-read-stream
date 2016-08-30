@@ -1,6 +1,8 @@
 S3BlockReadStream
 =================
 
+[![Build Status](https://travis-ci.org/tilfin/s3-block-read-stream.svg?branch=master)](https://travis-ci.org/tilfin/s3-block-read-stream)
+
 A S3 readable stream is downloading an object divided into blocks by partial download with the range header.
 
 * It is possible to prevent a broken connection of long-time against S3 normal stream.
