@@ -8,7 +8,7 @@ A S3 readable stream is downloading an object divided into blocks by partial dow
 
 * It is possible to prevent a broken connection of long-time against S3 normal stream.
 * You can adjust a download speed on flowing mode by editing the interval.
-* Node.js 4.2 or Later
+* Node.js 6.10 or Later
 
 ## How to Install
 

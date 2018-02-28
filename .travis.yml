@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-  - "4.3"
-  - "6.0"
-script: 'npm test'
+  - "6.10"
+  - "8"
+  - "9"
+install:
+  - npm install -g codecov
+script:
+  - npm test
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - codecov
