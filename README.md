@@ -3,6 +3,7 @@ S3BlockReadStream
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status](https://travis-ci.org/tilfin/s3-block-read-stream.svg?branch=master)](https://travis-ci.org/tilfin/s3-block-read-stream)
+[![codecov](https://codecov.io/gh/tilfin/s3-block-read-stream/branch/master/graph/badge.svg)](https://codecov.io/gh/tilfin/s3-block-read-stream)
 
 A S3 readable stream is downloading an object divided into blocks by partial download with the range header.
 
