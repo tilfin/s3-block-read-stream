@@ -1,0 +1,4 @@
+.npmignore
+coverage/
+test/
+node_modules/
