@@ -35,12 +35,6 @@ describe('S3BlockReadStream', () => {
       endpoint: new AWS.Endpoint('http://localhost:4572')
     });
 
-  const headRes = {
-    'accept-ranges': 'bytes',
-    'content-type': 'application/octet-stream',
-    'content-length': '22',
-  };
-
   context('partial request once', () => {
     it('read whole data', (done) => {
       const readStream = new S3BlockReadStream(s3, {
@@ -70,6 +64,25 @@ describe('S3BlockReadStream', () => {
 
       readStream.on('end', () => {
         expect(writeStream.toString()).to.equal('0123456789ABCDEFabcdef');
+        done();
+      });
+
+      readStream.pipe(writeStream);
+    });
+  });
+
+  context('target object is empty', () => {
+    it('read empty', (done) => {
+      const readStream = new S3BlockReadStream(s3, {
+        Bucket: 'test-bucket',
+        Key: 'empty'
+      }, {
+        blockSize: 16
+      });
+      const writeStream = new MemoryWriteStream();
+
+      readStream.on('end', () => {
+        expect(writeStream.toString()).to.empty;
         done();
       });
 
