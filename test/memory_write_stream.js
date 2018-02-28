@@ -5,7 +5,7 @@ const util = require('util');
 
 function MemoryWriteStream() {
   stream.Writable.call(this);
-  this._encoding = null;
+  this._encoding = 'ascii';
   this._buffer = new Buffer(0);
 }
 util.inherits(MemoryWriteStream, stream.Writable); // step 1
